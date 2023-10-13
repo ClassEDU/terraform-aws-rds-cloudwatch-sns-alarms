@@ -81,7 +81,7 @@ resource "aws_db_event_subscription" "default" {
   event_categories = local.event_categories[var.source_type]
 
   depends_on = [
-    local.aws_sns_topic_arn
+    aws_sns_topic_policy.default
   ]
 }
 

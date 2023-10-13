@@ -66,3 +66,9 @@ variable "source_type" {
     error_message = "Valid options are \"db-instance\", \"db-security-group\", \"db-parameter-group\", \"db-snapshot\", \"db-cluster\" or \"db-cluster-snapshot\", \"custom-engine-version\"."
   }
 }
+
+variable "pod_name" {
+  description = "The name of the pod."
+  type        = string
+  default     = "pod-name"
+}
