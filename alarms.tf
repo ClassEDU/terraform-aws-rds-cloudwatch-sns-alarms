@@ -9,10 +9,11 @@ locals {
     SwapUsageThreshold        = max(var.swap_usage_threshold, 0)
   }
   pod_name = var.pod_name
+  db_instance_id = var.db_instance_id
 }
 
 resource "aws_cloudwatch_metric_alarm" "burst_balance_too_low" {
-  alarm_name          = "${local.pod_name}_burst-balance-too-low"
+  alarm_name          = "${local.pod_name}_${local.db_instance_id}_burst-balance-too-low"
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "1"
   metric_name         = "BurstBalance"
@@ -30,7 +31,7 @@ resource "aws_cloudwatch_metric_alarm" "burst_balance_too_low" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "cpu_utilization_too_high" {
-  alarm_name          = "${local.pod_name}_cpu-utilization-too-high"
+  alarm_name          = "${local.pod_name}_${local.db_instance_id}_cpu-utilization-too-high"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
   metric_name         = "CPUUtilization"
@@ -48,7 +49,7 @@ resource "aws_cloudwatch_metric_alarm" "cpu_utilization_too_high" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "cpu_credit_balance_too_low" {
-  alarm_name          = "${local.pod_name}_cpu-credit-balance-too-low"
+  alarm_name          = "${local.pod_name}_${local.db_instance_id}_cpu-credit-balance-too-low"
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "1"
   metric_name         = "CPUCreditBalance"
@@ -66,7 +67,7 @@ resource "aws_cloudwatch_metric_alarm" "cpu_credit_balance_too_low" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "disk_queue_depth_too_high" {
-  alarm_name          = "${local.pod_name}_disk-queue-depth-too-high"
+  alarm_name          = "${local.pod_name}_${local.db_instance_id}_disk-queue-depth-too-high"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
   metric_name         = "DiskQueueDepth"
@@ -84,7 +85,7 @@ resource "aws_cloudwatch_metric_alarm" "disk_queue_depth_too_high" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "freeable_memory_too_low" {
-  alarm_name          = "${local.pod_name}_freeable-memory-too-low"
+  alarm_name          = "${local.pod_name}_${local.db_instance_id}_freeable-memory-too-low"
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "1"
   metric_name         = "FreeableMemory"
@@ -102,7 +103,7 @@ resource "aws_cloudwatch_metric_alarm" "freeable_memory_too_low" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "free_storage_space_too_low" {
-  alarm_name          = "${local.pod_name}_free-storage-space-threshold"
+  alarm_name          = "${local.pod_name}_${local.db_instance_id}_free-storage-space-threshold"
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "1"
   metric_name         = "FreeStorageSpace"
@@ -120,7 +121,7 @@ resource "aws_cloudwatch_metric_alarm" "free_storage_space_too_low" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "swap_usage_too_high" {
-  alarm_name          = "${local.pod_name}_swap-usage-too-high"
+  alarm_name          = "${local.pod_name}_${local.db_instance_id}_swap-usage-too-high"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
   metric_name         = "SwapUsage"
